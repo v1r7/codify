@@ -28,4 +28,5 @@ admin.site.register(models.Products)
 admin.site.register(models.submit_application)
 admin.site.register(models.contacts)
 admin.site.register(models.news)
+admin.site.register(models.Picture)
 

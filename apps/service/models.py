@@ -170,3 +170,11 @@ class news(models.Model):
     verbose_name = 'Новость'
     verbose_name_plural = 'Новости'
 
+
+class Picture(models.Model):
+#Картинки#
+  img_poster = models.ImageField(upload_to='images/',
+                                 verbose_name='Картинки',
+                                 null=True,
+                                 blank=True)
+
