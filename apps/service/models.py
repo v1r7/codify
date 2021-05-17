@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.safestring import mark_safe
 from mptt.models import MPTTModel, TreeForeignKey
 from phonenumber_field.modelfields import PhoneNumberField
 
@@ -13,7 +14,8 @@ class Products(models.Model):
                                  null=True,
                                  blank=True)
 
-  img_poster = models.ImageField(blank=True,
+  image = models.ImageField(upload_to='products/',
+                                 blank=True,
                                  verbose_name='Картинки',
                                  null=True,
                                  )
@@ -61,10 +63,10 @@ class Services(MPTTModel):
                           on_delete=models.SET_NULL,
                           null=True,
                           blank=True)
-  img_poster = models.ImageField(null=True,
-                                 blank=True,
-                                 verbose_name='Картинки'
-                                 )
+  image = models.ImageField(upload_to='services/',
+                            null=True,
+                            blank=True,
+                            verbose_name='Картинки')
 
 
   class MPTTMeta:
@@ -158,7 +160,7 @@ class news(models.Model):
                                     verbose_name='Дата создания'
                                     )
 
-  img_poster = models.ImageField(blank=True,
+  image= models.ImageField(blank=True,
                                  verbose_name='Картинки',
                                  null=True,
                                  )
@@ -173,8 +175,25 @@ class news(models.Model):
 
 class Picture(models.Model):
 #Картинки#
-  img_poster = models.ImageField(upload_to='images/',
+  image = models.ImageField(upload_to='media/',
                                  verbose_name='Картинки',
                                  null=True,
                                  blank=True)
+
+
+  # def image_tag(self):
+  #   return mark_safe('<img src="/media/%s" width="150" height="150" />' % (self.image))
+  #   image_tag.short_description = 'Image'
+
+
+  # def image_img(self):
+  #   if self.img_poster:
+  #     from django.utils.safestring import mark_safe
+  #     return mark_safe(u'<a href="{0}" target="_blank"><img src="{0}" width="100"/></a>'.format(self.img_poster.url))
+  #   else:
+  #     return '(Нет изображения)'
+  #
+  #
+  # image_img.short_description = 'Картинка'
+  # image_img.allow_tags = True
 
