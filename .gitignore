@@ -1,3 +1,6 @@
 .key/
 .venv/
+env/
 .idea/
+static/
+media/

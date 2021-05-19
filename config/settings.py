@@ -33,6 +33,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    'jet',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -85,9 +86,9 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'codify_lab',
-        'USER': 'postgres',
-        'PASSWORD': 'postgres',
+        'NAME': 'lab',
+        'USER': 'asinmu',
+        'PASSWORD': 'feichanghao6',
         'HOST': '',
         'PORT': '5432',
     }
