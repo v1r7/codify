@@ -6,7 +6,6 @@ from .upload import upload_instance
 class Products(models.Model):
     """
     Последние работы
-
     """
     title = models.CharField(verbose_name='Название',
                              max_length=100,

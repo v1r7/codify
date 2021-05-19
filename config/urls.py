@@ -7,7 +7,8 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('jet/', include('jet.urls', 'jet'))
+    path('jet/', include('jet.urls', 'jet')),
+    path('', include('apps.service.urls')),
 ]
 #
 # if settings.DEBUG:

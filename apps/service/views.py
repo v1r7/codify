@@ -1,13 +1,11 @@
-from django.shortcuts import render
-
-# Create your views here.
-from django.views.generic.base import View
-
+from rest_framework.viewsets import ModelViewSet
+from rest_framework import generics
+from .serializers import ServiceSerializer
 from .models import Services
+from rest_framework.permissions import AllowAny
 
-#
-# class ServicesView(View):
-# 	def get(self, request):
-# 		services = Services.objects.all()
-# 		return render(request,"services/service_list.html",
-# 		              {"service_list": services})
+
+class ServiceView(generics.ListAPIView):
+    permission_classes = AllowAny,
+    serializer_class = ServiceSerializer
+    queryset = Services.objects.all()
