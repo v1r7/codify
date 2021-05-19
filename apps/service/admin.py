@@ -6,12 +6,13 @@ from django.utils.safestring import mark_safe
 
 @admin.register(Services)
 class ProductsAdmin(admin.ModelAdmin):
-	list_display = ("id", "title", "parent", "get_image")
-	list_filter = ("title",)
+	list_display = ("name", "title", "parent", "get_image")
+	list_filter = ("name",)
 	search_fields = ("parent__name", "title__name")
 
 	def get_image(self, obj):
-		return mark_safe(f'<img src={obj.image.url} width="50" height="60"')
+		return mark_safe(f'<img src={obj.image.url} width="100" height="100"')
+
 
 	get_image.short_description = "Изображение"
 

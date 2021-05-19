@@ -1,7 +1,8 @@
 from django.db import models
-from django.utils.safestring import mark_safe
 from mptt.models import MPTTModel, TreeForeignKey
 from phonenumber_field.modelfields import PhoneNumberField
+
+from utils.upload import upload_instance
 
 
 class Products(models.Model):
@@ -14,7 +15,7 @@ class Products(models.Model):
                                  null=True,
                                  blank=True)
 
-  image = models.ImageField(upload_to='products/',
+  image = models.ImageField(upload_to=upload_instance,
                                  blank=True,
                                  verbose_name='Картинки',
                                  null=True,
@@ -54,6 +55,10 @@ class Services(MPTTModel):
                            blank=True,
                            null=True
                            )
+  image = models.ImageField(upload_to=upload_instance,
+                            null=True,
+                            blank=True,
+                            verbose_name='Картинки')
   #category_id = models.CharField(max_length=255,
    #                             null=True
     #                            )
@@ -63,10 +68,7 @@ class Services(MPTTModel):
                           on_delete=models.SET_NULL,
                           null=True,
                           blank=True)
-  image = models.ImageField(upload_to='services/',
-                            null=True,
-                            blank=True,
-                            verbose_name='Картинки')
+
 
 
   class MPTTMeta:
@@ -160,10 +162,11 @@ class news(models.Model):
                                     verbose_name='Дата создания'
                                     )
 
-  image= models.ImageField(blank=True,
-                                 verbose_name='Картинки',
-                                 null=True,
-                                 )
+  image= models.ImageField(upload_to=upload_instance,
+                           blank=True,
+                           verbose_name='Картинки',
+                           null=True,
+                           )
 
   def __str__(self):
       return self.title
@@ -175,7 +178,7 @@ class news(models.Model):
 
 class Picture(models.Model):
 #Картинки#
-  image = models.ImageField(upload_to='media/',
+  image = models.ImageField(upload_to=upload_instance,
                                  verbose_name='Картинки',
                                  null=True,
                                  blank=True)
