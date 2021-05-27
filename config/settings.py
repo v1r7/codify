@@ -40,12 +40,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'rest_framework',
-
-
-
+    # 'drf-yasg',
     'mptt',
-
     'apps.service',
 
 ]
@@ -87,9 +85,9 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'lab',
-        'USER': 'asinmu',
-        'PASSWORD': 'feichanghao6',
+        'NAME': 'codify',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
         'HOST': '',
         'PORT': '5432',
     }
