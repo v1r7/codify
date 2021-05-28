@@ -11,6 +11,10 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('jet/', include('jet.urls', 'jet')),
     path('', include('apps.service.urls')),
+    path('', include('apps.products.urls')),
+    path('', include('apps.submitapplication.urls')),
+    path('', include('apps.service.urls')),
+    path('', include('apps.service.urls')),
 ]
 
 if settings.DEBUG:

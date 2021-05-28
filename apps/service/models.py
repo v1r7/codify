@@ -23,18 +23,6 @@ class Products(models.Model):
         verbose_name = 'Наш продукт'
         verbose_name_plural = 'Наши продукты'
 
-
-# class Category(models.Model):
-#   name = models.CharField(max_length=255)
-#   category = models.CharField(max_length=255)
-#
-#   def __str__(self):
-#     return self.name
-#
-#   class Meta:
-#     verbose_name = 'Категория'
-#     verbose_name_plural = 'Категории'
-
 class Services(MPTTModel):
     """
     Услуги
@@ -73,7 +61,6 @@ class Services(MPTTModel):
         verbose_name = 'Услуги'
         verbose_name_plural = 'Услуги'
 
-
     """
     Таблицы без связей
     """
@@ -95,6 +82,10 @@ class SubmitApplication(models.Model):
                                     verbose_name='Номер телефона',
                                     blank=False,
                                     unique=True)
+    created_at = models.DateTimeField(auto_now_add=True,
+                                      verbose_name='Дата создания'
+                                      )
+
 
     def __str__(self):
         return self.name
@@ -191,12 +182,3 @@ class News(models.Model):
         verbose_name = 'Новость'
         verbose_name_plural = 'Новости'
 
-
-# class Picture(models.Model):
-#     """
-#     Картинки
-#     """
-#     image = models.ImageField(upload_to=upload_instance,
-#                               verbose_name='Картинки',
-#                               null=True,
-#                               blank=True)
