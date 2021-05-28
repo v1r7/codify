@@ -11,6 +11,3 @@ def upload_instance(instance, filename):
     return f'uploads/{instance.__class__.__name__}/{filename[2:3]}/{filename}'
 
 
-
-def get_image(self, obj):
-    return  mark_safe(f'<img src={obj.image.url} width="100" height="100"')

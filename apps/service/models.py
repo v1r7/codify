@@ -1,35 +1,14 @@
 from django.db import models
-from mptt.models import MPTTModel, TreeForeignKey
 from .upload import upload_instance
 
 
-class Products(models.Model):
-    """
-    Последние работы
-    """
-    title = models.CharField(verbose_name='Название',
-                             max_length=100,)
-    description = models.TextField(verbose_name='Описание',
-                                   null=True,)
-
-    image = models.ImageField(upload_to=upload_instance,
-                              blank=True,
-                              verbose_name='Картинки',)
-
-    def __str__(self):
-        return self.title
-
-    class Meta:
-        verbose_name = 'Наш продукт'
-        verbose_name_plural = 'Наши продукты'
-
-class Services(MPTTModel):
+class Service(models.Model):
     """
     Услуги
     """
     name = models.CharField(max_length=255,
                             null=True,
-                            verbose_name='Название',)
+                            verbose_name='Название', )
     title = models.TextField(max_length=255,
                              verbose_name='Заголовок',
                              blank=True,
@@ -39,20 +18,6 @@ class Services(MPTTModel):
                               null=True,
                               blank=True,
                               verbose_name='Картинки')
-    product_id = models.ForeignKey(to=Products,
-                                   max_length=255,
-                                   on_delete=models.SET_NULL,
-                                   blank=True,
-                                   null=True)
-    parent = TreeForeignKey('self',
-                            verbose_name='Под категория',
-                            related_name="children",
-                            on_delete=models.SET_NULL,
-                            null=True,
-                            blank=True)
-
-    class MPTTMeta:
-        order_insertion_by = ['title']
 
     def __str__(self):
         return self.name
@@ -61,9 +26,32 @@ class Services(MPTTModel):
         verbose_name = 'Услуги'
         verbose_name_plural = 'Услуги'
 
+
+class Product(models.Model):
     """
-    Таблицы без связей
+    Последние работы
     """
+    title = models.CharField(verbose_name='Название',
+                             max_length=100)
+    description = models.TextField(verbose_name='Описание',
+                                   null=True)
+    image = models.ImageField(upload_to=upload_instance,
+                              blank=True,
+                              verbose_name='Картинки', )
+    link = models.CharField(verbose_name='Ссылка',
+                            max_length=100)
+    service_id = models.ForeignKey(Service,
+                                   on_delete=models.SET_NULL,
+                                   related_name='products',
+                                   null=True)
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = 'Наш продукт'
+        verbose_name_plural = 'Наши продукты'
+
 
 class SubmitApplication(models.Model):
     """
@@ -72,20 +60,26 @@ class SubmitApplication(models.Model):
     name = models.CharField(verbose_name='Имя',
                             max_length=100
                             )
-    mail = models.EmailField(max_length=255,
-                             verbose_name='Мейл',
-                             null=False,
-                             blank=False,
-                             unique=True)
+    surname = models.CharField(verbose_name='Фамилия',
+                               max_length=100
+                               )
+    email = models.EmailField(max_length=255,
+                              verbose_name='Почта',
+                              null=False,
+                              blank=False,
+                              unique=True)
+    comment = models.CharField(verbose_name='Комментарий',
+                               max_length=250
+                               )
     phone_number = models.CharField(null=False,
                                     max_length=100,
                                     verbose_name='Номер телефона',
                                     blank=False,
                                     unique=True)
     created_at = models.DateTimeField(auto_now_add=True,
-                                      verbose_name='Дата создания'
+                                      verbose_name='Дата создания',
+                                      blank=True
                                       )
-
 
     def __str__(self):
         return self.name
@@ -94,12 +88,13 @@ class SubmitApplication(models.Model):
         verbose_name = 'Заявка'
         verbose_name_plural = 'Заявки'
 
-class Rates(models.Model):
+
+class Rate(models.Model):
     """
     Тарифы
     """
     name = models.CharField(verbose_name='Название',
-                             max_length=100, )
+                            max_length=100, )
     description = models.TextField(verbose_name='Описание',
                                    null=True, )
 
@@ -113,7 +108,7 @@ class Rates(models.Model):
         return self.name
 
 
-class Contacts(models.Model):
+class Contact(models.Model):
     """
     Контакты Codify
     """
@@ -162,13 +157,14 @@ class News(models.Model):
     Новостная лента
     """
     title = models.CharField(verbose_name='Название',
-                             max_length=100,)
+                             max_length=100, )
+    author = models.CharField(verbose_name='Автор',
+                              max_length=100, )
     description = models.TextField(verbose_name='Описание',
-                                   max_length=100,)
+                                   max_length=100, )
     created_at = models.DateTimeField(auto_now_add=True,
                                       verbose_name='Дата создания'
                                       )
-
     image = models.ImageField(upload_to=upload_instance,
                               blank=True,
                               verbose_name='Картинки',
@@ -181,4 +177,3 @@ class News(models.Model):
     class Meta:
         verbose_name = 'Новость'
         verbose_name_plural = 'Новости'
-

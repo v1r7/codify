@@ -1,35 +1,39 @@
 from rest_framework import serializers
-from .models import *
+from .models import Product, Service, SubmitApplication, Rate, Contact, News
 
 
 class ProductsSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Products
-        fields = ['title', 'description']
+        model = Product
+        fields = ['title', 'description', 'service_id', 'link']
+
 
 class ServicesSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Services
-        fields = ['name', 'title', 'parent']
+        model = Service
+        fields = ['name', 'title', 'products', 'image']
+
 
 class SubmitApplicationSerializer(serializers.ModelSerializer):
     class Meta:
         model = SubmitApplication
-        fields = ['name', 'mail', 'phone_number',]
+        fields = ['name', 'email', 'phone_number', 'created_at', 'comment']
+
 
 class RatesSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Rates
+        model = Rate
         fields = ['name', 'description', 'price']
+
 
 class ContactsSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Contacts
+        model = Contact
         fields = ['name', 'mail', 'phone_number', 'whatsapp_number',
                   'instagram', 'twitter', 'facebook']
+
 
 class NewsSerializer(serializers.ModelSerializer):
     class Meta:
         model = News
-        fields = ['title', 'description', 'created_at']
-
+        fields = ['title', 'description', 'created_at', 'image']
