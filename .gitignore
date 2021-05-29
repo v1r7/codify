@@ -4,3 +4,4 @@ env/
 .idea/
 static/
 media/
+settings.env/
